@@ -1,9 +1,14 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
+
 ESP8266WebServer webServer(80);
+
 char* ssid = "Tên Wifi";
 char* pass = "Mật khẩu";
-//=========Biến chứa mã HTLM Website==//
+
+/***************************************************************************/
+/* AP INFO */
+/***************************************************************************/
 const char MainPage[] PROGMEM = R"=====(
   <!DOCTYPE html> 
   <html>
@@ -81,8 +86,10 @@ const char MainPage[] PROGMEM = R"=====(
    </body> 
   </html>
 )=====";
-//=========================================//
-void setup() {
+
+/***************************************************************************/
+/* SETUP */
+/***************************************************************************/void setup() {
   pinMode(D1,OUTPUT);
   pinMode(D2,OUTPUT);
   digitalWrite(D1,HIGH);
@@ -107,7 +114,10 @@ void setup() {
 void loop() {
   webServer.handleClient();
 }
-//==========Chương trình con=================//
+
+/***************************************************************************/
+/* SUBPROGRAM */
+/***************************************************************************/
 void mainpage(){
   String s = FPSTR(MainPage);
   webServer.send(200,"text/html",s);
